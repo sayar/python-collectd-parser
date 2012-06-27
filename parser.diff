@@ -1,0 +1,29 @@
+8a9,10
+> #
+> # Updated by Rami Sayar for Collectd 5.1. Added DERIVE handling.
+44a47,48
+> TYPE_TIMEHR          = 0x0008
+> TYPE_INTERVALHR      = 0x0009
+53c57
+< 
+---
+> DS_TYPE_DERIVE       = 2
+56a61
+> signed_number = struct.Struct("!q") # DERIVE are signed long longs
+79a85,87
+>         elif dstype == DS_TYPE_DERIVE:
+>             result.append((dstype, signed_number.unpack_from(buf, off)[0]))
+>             off += valskip
+109a118,119
+>     TYPE_TIMEHR         : decode_network_number,
+>     TYPE_INTERVALHR     : decode_network_number,
+141a152,154
+>     timehr = 0
+>     intervalhr = 0
+> 
+217a231,232
+>         elif kind == TYPE_TIMEHR:
+>             vl.timehr = nt.timehr = data
+219a235,236
+>         elif kind == TYPE_INTERVALHR:
+>             vl.intervalhr = data
