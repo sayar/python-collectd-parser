@@ -1,11 +1,18 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 #
+
+
+import sys
 import socket
 
-import unittest
-import collectd_parser
+if sys.version_info[:2] <= (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
+
+import collectd_parser
 
 
 class Test_Collectd_Parser(unittest.TestCase):
@@ -86,3 +93,8 @@ class Test_Collectd_Multicast(Test_Collected_Reader):
     def setUp(self):
         super(Test_Collectd_Multicast, self).setUp(dobind=False)
 
+
+#############################################################################
+
+if __name__ == '__main__':
+    unittest.main()
